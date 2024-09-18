@@ -1,2 +1,7 @@
 credentials.json
 appdata.py
+.env
+*lib/*
+*__pycache__/*
+*logs/*
+venv/*

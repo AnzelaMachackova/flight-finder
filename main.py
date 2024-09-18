@@ -1,5 +1,9 @@
 from data_manager import DataManager
-from appdata import GOOGLE_SHEET_ID
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+GOOGLE_SHEET_ID = os.getenv("GOOGLE_SHEET_ID")
 
 def main():
     data_manager = DataManager(GOOGLE_SHEET_ID)
@@ -13,7 +17,7 @@ def main():
         sheet = data_manager.sheet
         headers = sheet.row_values(1)
         index_to_update = headers.index(column_to_update) + 1  
-        index_condition = headers.index(column_condition) + 1
+        # index_condition = headers.index(column_condition) + 1
 
         for i, record in enumerate(records, start=2):  # start=2 because rows in gsheets are 1-based and the first row is headers
             if record[column_condition] == condition_value:
