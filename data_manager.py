@@ -12,8 +12,27 @@ class DataManager:
     def get_data(self):
         return self.sheet.get_all_records()
 
-    def push_data(self, data):
-        self.sheet.append_row(data)
+    def update_column(self, column_to_update, column_condition, condition_value, new_value):
+        records = self.get_data()
+        headers = self.sheet.row_values(1)
+        index_to_update = headers.index(column_to_update) + 1  
+        #index_condition = headers.index(column_condition) + 1
 
-    def update_data(self, row, column, value):
-        self.sheet.update_cell(row, column, value)  
+        for i, record in enumerate(records, start=2):
+            if record[column_condition] == condition_value:
+                print(f"Updating row {i} with value {new_value}.")
+                self.sheet.update_cell(i, index_to_update, new_value)
+            else:
+                print(f"City {condition_value} not found.")
+    
+
+    def update_iata_code(self, city, iata_code):
+        records = self.get_data()
+        headers = self.sheet.row_values(1)
+        index_to_update = headers.index('IATA Code') + 1
+
+        for i, record in enumerate(records, start=2):
+            if record['City'] == city:
+                print(f"Updating row {i} with value {iata_code}")
+                self.sheet.update_cell(i, index_to_update, iata_code)
+                break
