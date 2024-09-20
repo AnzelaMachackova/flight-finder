@@ -4,7 +4,7 @@ import requests
 
 load_dotenv()
 
-TOKEN_ENDPOINT="https://api.amadeus.com/v1/security/oauth2/token"
+TOKEN_ENDPOINT="https://test.api.amadeus.com/v1/security/oauth2/token"
 class FlightSearch:
     def __init__(self):
         self._api_key = os.environ["AMADEUS_API_KEY"]
@@ -13,15 +13,15 @@ class FlightSearch:
 
     def _get_new_token(self):
         # Get a new token from the Amadeus API
-        headers = {
-        "Content-Type": "application/x-www-form-urlencoded"
+        header = {
+            'Content-Type': 'application/x-www-form-urlencoded'
         }
         data = {
-            "grant_type": "client_credentials",
-            "client_id": self._api_key,
-            "client_secret": self._api_secret
+            'grant_type': 'client_credentials',
+            'client_id': self._api_key,
+            'client_secret': self._api_secret
         }
-        response = requests.post(url=TOKEN_ENDPOINT, headers=headers, data=data)
+        response = requests.post(url=TOKEN_ENDPOINT, headers=header, data=data)
 
         if response.status_code == 200: 
             token_data = response.json()
