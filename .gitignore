@@ -5,3 +5,4 @@ appdata.py
 *__pycache__/*
 *logs/*
 venv/*
+cloud-function/*
